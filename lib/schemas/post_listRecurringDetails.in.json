@@ -1,0 +1,47 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "merchantAccount": {
+                    "description": "The merchant account identifier you want to process the (transaction) request with.",
+                    "type": "string"
+                },
+                "recurring": {
+                    "description": "A container for the type of a recurring contract to be retrieved.\n\nThe contract value needs to match the contract value submitted in the payment transaction used to create a recurring contract.\nHowever, if `ONECLICK,RECURRING` is the original contract definition in the initial payment, then `contract` should take either `ONECLICK` or `RECURRING`, depending on whether or not you want the shopper to enter their card's security code when they finalize their purchase.",
+                    "properties": {
+                        "contract": {
+                            "description": "The type of recurring contract to be used.\nPossible values:\n* `ONECLICK` – The shopper opts to store their card details for future use. The shopper is present for the subsequent transaction, for cards the security code (CVC/CVV) is required.\n* `RECURRING` – Payment details are stored for future use. For cards, the security code (CVC/CVV) is not required for subsequent payments. This is used for shopper not present transactions.\n* `ONECLICK,RECURRING` – Payment details are stored for future use. This allows the use of the stored payment details regardless of whether the shopper is on your site or not.",
+                            "enum": [
+                                "ONECLICK",
+                                "RECURRING",
+                                "PAYOUT"
+                            ],
+                            "type": "string"
+                        },
+                        "recurringDetailName": {
+                            "description": "A descriptive name for this detail.",
+                            "type": "string"
+                        },
+                        "tokenService": {
+                            "description": "The name of the token service.",
+                            "enum": [
+                                "VISATOKENSERVICE"
+                            ],
+                            "type": "string"
+                        }
+                    }
+                },
+                "shopperReference": {
+                    "description": "The reference you use to uniquely identify the shopper (e.g. user ID or account ID).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "merchantAccount",
+                "shopperReference"
+            ],
+            "type": "object"
+        }
+    }
+}

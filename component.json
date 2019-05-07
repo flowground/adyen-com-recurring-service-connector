@@ -1,0 +1,68 @@
+{
+    "title": "Adyen Recurring Service",
+    "description": "Additional methods that allow you to manage payment details stored for recurring payments. For more information, refer to [Recurring payments](https://docs.adyen.com/developers/features/recurring-payments).",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/adyen.com/RecurringService/25/openapi.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://pal-test.adyen.com/pal/servlet/Recurring/v25",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "post_disable": {
+            "main": "./lib/actions/post_disable.js",
+            "title": "Disables stored payment details.",
+            "description": "Disables stored payment details to stop charging a shopper with this particular recurring detail ID.\n\nFor more information, refer to [Disable stored details](https://docs.adyen.com/developers/features/recurring-payments/disable-stored-details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_disable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_listRecurringDetails": {
+            "main": "./lib/actions/post_listRecurringDetails.js",
+            "title": "Retrieves stored payment details for a shopper.",
+            "description": "Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.\n\nFor more information, refer to [Retrieve stored details](https://docs.adyen.com/developers/features/recurring-payments/retrieve-stored-details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_listRecurringDetails.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
